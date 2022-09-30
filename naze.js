@@ -16,6 +16,7 @@ const moment = require('moment-timezone')
 const { JSDOM } = require('jsdom')
 const speed = require('performance-now')
 const { performance } = require('perf_hooks')
+const { hentai } = require('./lib/scraper2.js')
 const { Primbon } = require('scrape-primbon')
 const primbon = new Primbon()
 const { smsg, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, format, parseMention, getRandom, getGroupAdmins } = require('./lib/myfunc')
@@ -2180,6 +2181,14 @@ Untuk Download Media Silahkan Klik salah satu Button dibawah ini atau masukkan c
 		naze.sendMessage(m.chat, { audio: { url: result.audio }, fileName: result.title+'.mp3', mimetype: 'audio/mpeg' }, { quoted: m })
 	    }
 	    break
+        case 'hentaividios': case 'hentaivideo': {
+                if (!isPremium) return m.reply(global.mess.premium)
+                m.reply(global.mess.wait)
+                anu = await hentai()
+        result912 = anu[Math.floor(Math.random(), anu.length)]
+                naze.sendMessage(m.chat, { video: { url: result912.video_1 }, caption: `${global.emoji}Title : ${result912.title}\n${global.emoji}Category : ${result912.category}\n${global.emoji}Mimetype : ${result912.type}\n${global.emoji}Views : ${result912.views_count}\n${global.emoji}Shares : ${result912.share_count}\n${global.emoji}Source : ${result912.link}\n${global.emoji}Media Url : ${result912.video_1}` }, { quoted: m })
+            }
+            break
 		case 'iqra': {
 		oh = `Example : ${prefix + command} 3\n\nIQRA Yang tersedia : 1,2,3,4,5,6`
 		if (!text) throw oh
